@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinay Singh Chaudhary - Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #1a2b4a;
+      --accent: #2563eb;
+      --accent-light: #dbeafe;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #ffffff;
+      --tag-bg: #f1f5f9;
+      --section-gap: 14px;
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      html, body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      .no-print { display: none !important; }
+      body { background: #fff !important; font-size: 11.5px; }
+      .resume {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        width: 100%;
+      }
+      /* Make body layout work on print */
+      .body { display: flex !important; }
+      .sidebar {
+        width: 190px !important;
+        min-height: auto;
+        padding: 14px 13px !important;
+      }
+      .main { padding: 14px 18px !important; }
+      /* Prevent awkward page breaks inside entries */
+      .entry { page-break-inside: avoid; break-inside: avoid; }
+      .comp-item { page-break-inside: avoid; break-inside: avoid; }
+      .section { page-break-inside: avoid; break-inside: avoid; }
+      /* Allow natural page break between sections */
+      .page-break-before { page-break-before: always; break-before: always; }
+      /* Header repeated on each printed page via CSS */
+      .header { page-break-inside: avoid; break-inside: avoid; }
+      @page {
+        size: A4;
+        margin: 0.45in 0.4in;
+      }
+      /* Reduce tag font size in print */
+      .tag { font-size: 9.5px !important; padding: 1px 5px !important; }
+      .project-tech .tag { font-size: 9px !important; }
+      .skill-label { font-size: 9px !important; }
+      ul.bullets li { font-size: 11px !important; margin-bottom: 2px !important; }
+      .entry-title { font-size: 12px !important; }
+      .section-title { font-size: 9.5px !important; margin-bottom: 8px !important; }
+      .edu-title { font-size: 11px !important; }
+      .comp-sub { font-size: 10.5px !important; }
+      p { font-size: 11px !important; }
+      .header-name h1 { font-size: 22px !important; }
+      .section { margin-bottom: 11px !important; }
+      .skill-group { margin-bottom: 9px !important; }
+      .entry { margin-bottom: 11px !important; }
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: var(--text);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    /* ── TOOLBAR (screen only) ── */
+    .toolbar {
+      text-align: center;
+      padding: 14px 20px;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .toolbar h3 { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; }
+    .btn-print {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-print:hover { background: #1d4ed8; }
+
+    /* ── RESUME CARD ── */
+    .resume {
+      background: var(--bg);
+      max-width: 820px;
+      margin: 18px auto 36px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.12);
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--primary);
+      color: #fff;
+      padding: 26px 34px 20px;
+    }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .header-name h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .title-badge {
+      display: inline-block;
+      margin-top: 5px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 4px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+    .header-contact { text-align: right; font-size: 12px; line-height: 1.7; }
+    .header-contact a { color: #93c5fd; text-decoration: none; }
+    .header-links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .header-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,.1);
+      color: #bfdbfe;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 5px;
+      padding: 3px 10px;
+      font-size: 11.5px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .header-links a:hover { background: rgba(255,255,255,.2); color: #fff; }
+
+    /* ── BODY LAYOUT ── */
+    .body { display: flex; }
+    .sidebar {
+      width: 210px;
+      flex-shrink: 0;
+      background: #f8fafc;
+      border-right: 1px solid var(--border);
+      padding: 18px 15px;
+    }
+    .main { flex: 1; padding: 18px 22px; min-width: 0; }
+
+    /* ── SECTIONS ── */
+    .section { margin-bottom: var(--section-gap); }
+    .section:last-child { margin-bottom: 0; }
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 3px;
+      margin-bottom: 10px;
+    }
+
+    /* ── SKILLS ── */
+    .skill-group { margin-bottom: 11px; }
+    .skill-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 3px; }
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .tag.accent { background: var(--accent-light); border-color: #bfdbfe; color: var(--accent); }
+
+    /* ── EDUCATION ── */
+    .edu-item { margin-bottom: 10px; }
+    .edu-title { font-weight: 600; font-size: 12.5px; color: var(--primary); }
+    .edu-sub { font-size: 11.5px; color: var(--muted); }
+    .edu-year { font-size: 10.5px; color: var(--muted); margin-top: 1px; }
+    .edu-badge {
+      display: inline-block;
+      font-size: 10px;
+      background: #dcfce7;
+      color: #166534;
+      border-radius: 3px;
+      padding: 1px 6px;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-item { font-size: 12px; margin-bottom: 5px; display: flex; align-items: flex-start; gap: 5px; }
+    .cert-item::before { content: "✦"; color: var(--accent); font-size: 9px; margin-top: 2px; flex-shrink: 0; }
+
+    /* ── PROJECTS / ENTRIES ── */
+    .entry { margin-bottom: 13px; }
+    .entry-header { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 2px; }
+    .entry-title { font-weight: 700; font-size: 13px; color: var(--primary); }
+    .entry-date { font-size: 11px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+    .entry-sub { font-size: 11.5px; color: var(--muted); margin-bottom: 4px; font-style: italic; }
+
+    ul.bullets { list-style: none; padding: 0; }
+    ul.bullets li {
+      padding-left: 13px;
+      position: relative;
+      font-size: 12px;
+      color: var(--text);
+      margin-bottom: 2px;
+      line-height: 1.5;
+    }
+    ul.bullets li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 10px;
+      top: 2px;
+    }
+
+    .project-tech { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
+    .project-tech .tag { font-size: 10px; padding: 1px 6px; }
+
+    /* ── COMPETITIONS ── */
+    .comp-item { margin-bottom: 9px; }
+    .comp-title { font-weight: 600; font-size: 12.5px; color: var(--primary); }
+    .comp-sub { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+
+    /* ── INTERESTS ── */
+    .interests { font-size: 12px; color: var(--text); line-height: 1.6; }
+
+    /* ── COURSEWORK in sidebar ── */
+    .course-list { display: flex; flex-direction: column; gap: 4px; }
+    .course-item {
+      font-size: 11.5px;
+      color: var(--text);
+      padding: 3px 8px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOOLBAR - screen only, never prints -->
+<div class="toolbar no-print">
+  <h3>Vinay Singh Chaudhary &mdash; Professional Resume</h3>
+  <button class="btn-print" onclick="window.print()">&#8659; Save as PDF</button>
+</div>
+
+<div class="resume">
+
+  <!-- ════ HEADER ════ -->
+  <div class="header">
+    <div class="header-top">
+      <div class="header-name">
+        <h1>Vinay Singh Chaudhary</h1>
+        <span class="title-badge">Data Science &amp; Full-Stack Developer</span>
+      </div>
+      <div class="header-contact">
+        <div>+91 72379 01801 (WhatsApp)</div>
+        <div><a href="mailto:vs1782945@gmail.com">vs1782945@gmail.com</a></div>
+        <div>Rath, Hamirpur, Uttar Pradesh &ndash; 210431</div>
+      </div>
+    </div>
+    <div class="header-links">
+      <a href="https://www.linkedin.com/in/vinay-singh-chaudhary/" target="_blank">&#128279; LinkedIn</a>
+      <a href="https://github.com/VinaySinghChaudhary1" target="_blank">&#128187; GitHub</a>
+      <a href="https://study.iitm.ac.in/ds/" target="_blank">&#127891; IIT Madras BS-DS</a>
+    </div>
+  </div>
+
+  <!-- ════ BODY ════ -->
+  <div class="body">
+
+    <!-- ── SIDEBAR ── -->
+    <div class="sidebar">
+
+      <!-- TECHNICAL SKILLS -->
+      <div class="section">
+        <div class="section-title">Technical Skills</div>
+        <div class="skill-group">
+          <div class="skill-label">Languages</div>
+          <div class="tags">
+            <span class="tag accent">Python</span>
+            <span class="tag accent">SQL</span>
+            <span class="tag accent">Java</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">Bash/Linux</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">Data Science &amp; ML</div>
+          <div class="tags">
+            <span class="tag">Pandas</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">Matplotlib</span>
+            <span class="tag">Neural Nets (MLP)</span>
+            <span class="tag">Feature Engineering</span>
+            <span class="tag">EDA</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">AI / LLM Engineering</div>
+          <div class="tags">
+            <span class="tag accent">RAG Systems</span>
+            <span class="tag accent">LLM Agents</span>
+            <span class="tag">LangGraph</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Prompt Engineering</span>
+            <span class="tag">Vector Embeddings</span>
+            <span class="tag">Deployment</span>
+            <span class="tag">MLflow</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">Web Scraping</div>
+          <div class="tags">
+            <span class="tag">BeautifulSoup</span>
+            <span class="tag">Playwright</span>
+            <span class="tag">Scrapy</span>
+            <span class="tag">Crawl4AI</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">Cloud &amp; DevOps</div>
+          <div class="tags">
+            <span class="tag">GCP (GCS, BigQuery)</span>
+            <span class="tag">Docker</span>
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">Databases</div>
+          <div class="tags">
+            <span class="tag">SQLite</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Firestore</span>
+            <span class="tag">DuckDB</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-label">Analytics</div>
+          <div class="tags">
+            <span class="tag">Advanced Excel</span>
+            <span class="tag">Business Analytics</span>
+            <span class="tag">Data Visualization</span>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- CERTIFICATIONS -->
+      <div class="section">
+        <div class="section-title">Certifications</div>
+        <div class="cert-item">CCC &mdash; NIELIT (Computer Concepts)</div>
+        <div class="cert-item">O Level &mdash; NIELIT (IT Diploma)</div>
+        <div class="cert-item">IIT Madras Diploma in Programming</div>
+        <div class="cert-item">IIT Madras Diploma in Data Science</div>
+      </div>
+
+      <!-- INTERESTS -->
+      <div class="section">
+        <div class="section-title">Interests</div>
+        <div class="interests">
+          Teaching &amp; Tech Education &bull; Content Creation &bull; Social Media Management &bull; Open-Source &bull; AI Research
+        </div>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="section">
+        <div class="section-title">Languages</div>
+        <div class="tags">
+          <span class="tag accent">Hindi</span>
+          <span class="tag accent">English</span>
+        </div>
+      </div>
+
+    </div><!-- /sidebar -->
+
+    <!-- ── MAIN ── -->
+    <div class="main">
+
+      <!-- PROFESSIONAL SUMMARY -->
+      <div class="section">
+        <div class="section-title">Professional Summary</div>
+        <p style="font-size:12px; line-height:1.65; color:var(--text);">
+          Motivated fresher pursuing a <strong>BS in Data Science &amp; Applications from IIT Madras</strong>, with completed Diplomas in both Programming and Data Science. Skilled in <strong>full-stack web development, machine learning, RAG/LLM systems, agentic AI, and cloud deployment</strong>. Eager to apply hands-on project experience and modern AI tooling knowledge in an international, fast-paced engineering environment.
+        </p>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="section">
+        <div class="section-title">Projects</div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Trekking Management Application</span>
+            <span class="entry-date">Full-Stack Web App</span>
+          </div>
+          <ul class="bullets">
+            <li>Built an end-to-end web app with user authentication, booking management, and admin dashboard.</li>
+            <li>Designed RESTful APIs; integrated SQLite backend with a modern Vue.js frontend.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Vue.js</span><span class="tag">SQLite</span><span class="tag">REST API</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Household Services Platform</span>
+            <span class="entry-date">Full-Stack Web App</span>
+          </div>
+          <ul class="bullets">
+            <li>Multi-role platform (customer, provider, admin) with service booking and review system.</li>
+            <li>Implemented JWT authentication, Redis caching, Celery task queue, and role-based access control.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Vue.js</span><span class="tag">Redis</span><span class="tag">Celery</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Placement Portal &amp; Online Quiz Platform</span>
+            <span class="entry-date">Full-Stack Web App</span>
+          </div>
+          <ul class="bullets">
+            <li>Developed a placement portal supporting student applications and recruiter dashboards.</li>
+            <li>Built an online quiz platform with auto-grading, countdown timer, and result analytics.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">SQL</span><span class="tag">HTML/CSS</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">AI Agent Suite &mdash; GCS, Dataset Upload &amp; Auto-Deploy</span>
+            <span class="entry-date">Agentic AI / Cloud</span>
+          </div>
+          <ul class="bullets">
+            <li>Built autonomous AI agents for GCS bucket setup, dataset uploads, and quiz answering.</li>
+            <li>Deployed full websites via AI agents with automated GitHub Pages pipelines.</li>
+            <li>Applied LangGraph multi-agent orchestration with function/tool calling patterns.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag accent">LangGraph</span><span class="tag accent">GCP</span><span class="tag">FastAPI</span><span class="tag">GitHub Actions</span><span class="tag">Python</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Production-Grade RAG System</span>
+            <span class="entry-date">LLM Engineering</span>
+          </div>
+          <ul class="bullets">
+            <li>Built a full RAG pipeline with chunking strategies, hybrid search, and contextual retrieval.</li>
+            <li>Evaluated pipeline quality using RAGAS framework; integrated semantic caching for efficiency.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag accent">RAG</span><span class="tag">Vector DB</span><span class="tag">HuggingFace</span><span class="tag">RAGAS</span><span class="tag">Python</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Vehicle Parking Platform</span>
+            <span class="entry-date">Full-Stack Web App</span>
+          </div>
+          <ul class="bullets">
+            <li>Designed a real-time vehicle parking slot management system with live availability tracking and booking.</li>
+          </ul>
+          <div class="project-tech">
+            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">JavaScript</span>
+          </div>
+        </div>
+
+      </div><!-- /projects -->
+
+      <!-- ML COMPETITIONS -->
+      <div class="section">
+        <div class="section-title">ML Competitions</div>
+        <div class="comp-item">
+          <div class="comp-title">Recipe Rating Prediction &mdash; NLP Challenge</div>
+          <div class="comp-sub">Predicted ratings from user comments using TF-IDF, sentiment features, and gradient boosting (XGBoost/LightGBM).</div>
+        </div>
+        <div class="comp-item">
+          <div class="comp-title">Heavy Equipment Selling Price Prediction</div>
+          <div class="comp-sub">Regression challenge on auction data; engineered features and tuned XGBoost/Random Forest pipelines to minimize RMSLE.</div>
+        </div>
+      </div>
+
+      <!-- BDM PROJECT -->
+      <div class="section">
+        <div class="section-title">Business Analytics Project (BDM) &mdash; IIT Madras</div>
+        <ul class="bullets">
+          <li>Collected 2+ years of real business data and identified key operational inefficiencies.</li>
+          <li>Applied statistical analysis, regression modelling, and forecasting techniques.</li>
+          <li>Delivered a structured analytical report with data-backed recommendations.</li>
+        </ul>
+        <div class="project-tech" style="margin-top:6px;">
+          <span class="tag">Python</span><span class="tag">Advanced Excel</span><span class="tag">Statistics</span><span class="tag">Data Visualization</span>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px 28px;">
+          <div class="edu-item">
+            <div class="edu-title">BS &mdash; Data Science &amp; Applications</div>
+            <div class="edu-sub">IIT Madras (Online)</div>
+            <div class="edu-year">2023 &ndash; Expected 2027</div>
+            <div class="edu-badge">Both Diplomas Completed</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-title">BA &mdash; Bachelor of Arts</div>
+            <div class="edu-sub">Bundelkhand University, Jhansi</div>
+            <div class="edu-year">Completed 2023 &nbsp;|&nbsp; 66%</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-title">Class XII (PCM)</div>
+            <div class="edu-sub">Hind Angel's Public School, Rath</div>
+            <div class="edu-year">2019 &nbsp;|&nbsp; 93%</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-title">Class X</div>
+            <div class="edu-sub">Hind Angel's Public School, Rath</div>
+            <div class="edu-year">2017 &nbsp;|&nbsp; 10 CGPA</div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div><!-- /main -->
+  </div><!-- /body -->
+</div><!-- /resume -->
+
+</body>
+</html>
