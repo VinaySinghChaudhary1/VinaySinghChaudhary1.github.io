@@ -145,7 +145,15 @@
     }
     .header-contact { text-align: right; font-size: 12px; line-height: 1.7; }
     .header-contact a { color: #93c5fd; text-decoration: none; }
-    .header-links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .header-bottom {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .header-links { display: flex; flex-wrap: wrap; gap: 8px; }
     .header-links a {
       display: inline-flex;
       align-items: center;
@@ -160,6 +168,17 @@
       transition: background .2s;
     }
     .header-links a:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .header-update-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,.1);
+      color: #bfdbfe;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 5px;
+      padding: 3px 10px;
+      font-size: 11.5px;
+    }
 
     /* ── BODY LAYOUT ── */
     .body { display: flex; }
@@ -301,10 +320,15 @@
         <div>Rath, Hamirpur, Uttar Pradesh &ndash; 210431</div>
       </div>
     </div>
-    <div class="header-links">
-      <a href="https://www.linkedin.com/in/vinay-singh-chaudhary/" target="_blank">&#128279; LinkedIn</a>
-      <a href="https://github.com/VinaySinghChaudhary1" target="_blank">&#128187; GitHub</a>
-      <a href="https://study.iitm.ac.in/ds/" target="_blank">&#127891; IIT Madras BS-DS</a>
+    <div class="header-bottom">
+      <div class="header-links">
+        <a href="https://www.linkedin.com/in/vinay-singh-chaudhary/" target="_blank">&#128279; LinkedIn</a>
+        <a href="https://github.com/VinaySinghChaudhary1" target="_blank">&#128187; GitHub</a>
+        <a href="https://study.iitm.ac.in/ds/" target="_blank">&#127891; IIT Madras BS-DS</a>
+      </div>
+      <div class="header-update-badge">
+        &#128197; Updated: Sep 2026
+      </div>
     </div>
   </div>
 
